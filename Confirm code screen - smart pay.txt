@@ -1,0 +1,129 @@
+import 'package:flutter/material.dart';
+
+class ConfirmCode extends StatefulWidget {
+  const ConfirmCode({Key? key}) : super(key: key);
+
+  @override
+  State<ConfirmCode> createState() => _ConfirmCodeState();
+}
+
+class _ConfirmCodeState extends State<ConfirmCode> {
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+        child: Scaffold(
+          body: Padding(
+            padding: const EdgeInsets.only(top:10, right: 10, left: 10),
+            child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget> [
+              IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+                icon: const Icon(Icons.arrow_back_ios_new_sharp,),
+          iconSize: 15,
+        ),
+      const SizedBox(height: 65,),
+      const Center(
+        child: Text(
+          'Confirm code',
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+          const SizedBox(height: 14,),
+          const Center(
+            child: Text(
+              "*** *** 9656 We have sent a"
+            ),
+          ),
+          const Center(
+              child:  Text('Verification code to your number')),
+                const SizedBox(height: 34,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    otpfield(first: true, last: false),
+                    otpfield(first: true, last: false),
+                    otpfield(first: true, last: false),
+                    otpfield(first: true, last: false),
+                    otpfield(first: true, last: true),
+                  ],
+                ),
+                const SizedBox(height: 7,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                     Text("I didn't receive the code?"),
+                     Text(
+                      'Resend',
+                      style: TextStyle(color: Colors.cyan),
+                    )
+                  ],
+                ), const SizedBox(height: 70,),
+                MaterialButton(
+                  onPressed: (){},
+                  height: 50,
+                  minWidth: double.infinity,
+                  color: Colors.lightBlue[700],
+                  child:  Text(
+                      'Confirm',
+                      style: TextStyle(color: Colors.white,)
+                  ),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0)
+                  ),
+                ),
+            ],
+            ),
+          ),
+        )
+    );
+  }
+
+
+//OTP FIELD
+otpfield({ first, last}) {
+    return Container(
+      height: 85,
+      child: AspectRatio(
+          aspectRatio: 0.7,
+        child: TextField(
+          autofocus: true,
+          onChanged: (value) {
+            if (value.length == 1 && last == false) {
+              FocusScope.of (context).nextFocus();
+            }
+            if (value.length == 1 && first == false) {
+              FocusScope.of(context).previousFocus();
+            }
+          },
+          showCursor: true,
+          cursorColor: Colors.lightBlue[700],
+          readOnly: false,
+          textAlign: TextAlign.center,
+          keyboardType: TextInputType.number,
+          maxLength: 1,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+          ),
+          decoration: InputDecoration(
+            counter: const Offstage(),
+            enabledBorder: OutlineInputBorder(
+              borderSide: const BorderSide(width: 2, color: Colors.black12),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(width: 2, color: Colors.lightBlue.shade700),
+              borderRadius: BorderRadius.circular(12)
+            )
+          ),
+        ),
+      ),
+    );
+  }
+}

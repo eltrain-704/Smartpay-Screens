@@ -1,0 +1,135 @@
+import 'package:flutter/material.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+
+import 'confirm_code_screen.dart';
+
+class Login extends StatefulWidget {
+  const Login({Key? key}) : super(key: key);
+
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  bool _isVisible = false;
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.only(top:10, right: 10, left: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.arrow_back_ios_new_sharp,),
+                iconSize: 15,
+              ),
+              const SizedBox(height: 65,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                   Text(
+                    'Login',
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(height: 20,),
+              const Text('Phone Number'),
+              Container(
+                padding: const EdgeInsets.only(left: 16, right: 10),
+                decoration: BoxDecoration(
+                    color: Colors.black12,
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                child: InternationalPhoneNumberInput(
+                  onInputChanged: (value) {},
+                  cursorColor: Colors.black87,
+                  inputDecoration: const InputDecoration(
+                      border: InputBorder.none,
+                    hintText: 'Phone Number'
+                  ),
+
+                ),
+              ),
+              const SizedBox(height: 25,),
+              const Text('Password'),
+              Container(
+                padding: const EdgeInsets.only(left: 16, right: 10),
+                decoration: BoxDecoration(
+                  color: Colors.black12,
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                child: TextField(
+                  obscureText: !_isVisible,
+                  decoration: InputDecoration(
+                    hintText: 'Password',
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          _isVisible = !_isVisible;
+                        });
+                      },
+                      icon: _isVisible ? const Icon(
+                         Icons.visibility_outlined) : const Icon (Icons.visibility_off_outlined,
+                      color: null,
+                      ),
+                    ),
+                    border: InputBorder.none,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 7,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: const [
+                   Text(
+                    'Forgot Password?',
+                    style:  TextStyle(
+                      color: Colors.cyan,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 70,),
+              MaterialButton(
+                onPressed: (){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ConfirmCode()),
+                  );
+                },
+                height: 50,
+                minWidth: double.infinity,
+                color: Colors.lightBlue[900],
+                child:  Text(
+                    'Login',
+                style: TextStyle(color: Colors.white,)
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.0)
+                ),
+              ),
+              const SizedBox(height: 170,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const[
+                   Text("Don't have and account with us?"),
+                   Text(
+                    'Sign up',
+                    style: const TextStyle(color: Colors.cyan),
+                  )
+                ],
+              )
+            ],
+          )
+        )
+      )
+    );
+  }
+}
